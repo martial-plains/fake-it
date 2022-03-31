@@ -3,6 +3,12 @@ use std::{fs::File, io::Write};
 use log::info;
 use serde::Serialize;
 
+/// Export data to a JSON file
+///
+/// # Arguments
+///
+/// * `data` - data to export
+/// * `path` - path to export to
 pub fn export_to_json<T>(data: &T, path: &str) -> Result<(), serde_json::Error>
 where
     T: Serialize,
@@ -16,6 +22,12 @@ where
     Ok(())
 }
 
+/// Export data to a CSV file
+///
+/// # Arguments
+///
+/// * `data` - data to export
+/// * `path` - path to export to
 pub fn export_to_csv<T>(data: &Vec<T>, path: &str) -> Result<(), std::io::Error>
 where
     T: Serialize,
@@ -31,6 +43,12 @@ where
     Ok(())
 }
 
+/// Export data to an HTML
+///
+/// # Arguments
+///
+/// * `data` - data to export
+/// * `path` - path to export to
 pub fn export_to_html<T>(data: &Vec<T>, path: &str) -> Result<(), std::io::Error>
 where
     T: Serialize,
