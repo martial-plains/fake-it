@@ -30,3 +30,32 @@ where
 
     Ok(())
 }
+
+pub fn export_to_html<T>(data: &Vec<T>, path: &str) -> Result<(), std::io::Error>
+where
+    T: Serialize,
+{
+    let mut html = File::create(path).unwrap();
+
+    info!("Writing to file: {}", path);
+
+    html.write_all(
+        format!(
+            "<!DOCTYPE html><html><head><title>{}</title></head><body><table><tr>",
+            path
+        )
+        .as_bytes(),
+    )
+    .unwrap();
+
+    for item in data {
+        html.write_all(
+            format!("<tr><td>{}</td></tr>", serde_json::to_string(item).unwrap()).as_bytes(),
+        )
+        .unwrap();
+    }
+
+    html.write_all("</table></body></html>".as_bytes()).unwrap();
+
+    Ok(())
+}
