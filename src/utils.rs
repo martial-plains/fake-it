@@ -1,8 +1,9 @@
-use std::{collections::HashMap, fs::File, io::Write};
+use std::{collections::HashMap, fs::File, io::Write, path::Path};
 
 use log::info;
 use rand::Rng;
 use serde::Serialize;
+use serde_json::{json, Value};
 
 /// Export data to a JSON file
 ///
@@ -56,25 +57,28 @@ where
 {
     let mut html = File::create(path).unwrap();
 
+    let file_path = Path::new(path);
+
     info!("Writing to file: {}", path);
 
-    html.write_all(
+    html.write(
         format!(
             "<!DOCTYPE html><html><head><title>{}</title></head><body><table><tr>",
-            path
+            file_path.file_stem().unwrap().to_str().unwrap()
         )
         .as_bytes(),
-    )
-    .unwrap();
+    )?;
 
-    for item in data {
-        html.write_all(
-            format!("<tr><td>{}</td></tr>", serde_json::to_string(item).unwrap()).as_bytes(),
-        )
-        .unwrap();
+    // To HTML table
+    for row in data {
+        html.write(b"<tr>")?;
+        for cell in json!(row).as_object().unwrap().values() {
+            html.write(format!("<td>{}</td>", cell).as_bytes())?;
+        }
+        html.write(b"</tr>")?;
     }
 
-    html.write_all("</table></body></html>".as_bytes()).unwrap();
+    html.write(b"</table></body></html>")?;
 
     Ok(())
 }
