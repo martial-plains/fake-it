@@ -73,7 +73,7 @@ where
     for row in data {
         html.write(b"<tr>")?;
         for cell in json!(row).as_object().unwrap().values() {
-            html.write(format!("<td>{}</td>", cell).as_bytes())?;
+            html.write(format!("<td>{}</td>", cell.as_str().unwrap()).as_bytes())?;
         }
         html.write(b"</tr>")?;
     }
