@@ -2,7 +2,7 @@ use chrono::{DateTime, Datelike, TimeZone, Utc};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 
-use crate::datetime;
+use crate::{datetime, providers};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Person {
@@ -29,14 +29,30 @@ impl Person {
     pub fn date_of_birth(&self) -> DateTime<Utc> {
         self.date_of_birth
     }
+
+    #[must_use]
+    /// Geerates random female name
+    pub fn gen_rand_fname() -> &'static str {
+        let mut rng = rand::thread_rng();
+        let names = providers::person::first_names();
+        names[rng.gen_range(0..names.len())]
+    }
+
+    #[must_use]
+    /// Generates random surname
+    pub fn gen_rand_lname() -> &'static str {
+        let mut rng = rand::thread_rng();
+        let names = providers::person::last_names();
+        names[rng.gen_range(0..names.len())]
+    }
 }
 
 impl Default for Person {
     fn default() -> Person {
         let mut rng = rand::thread_rng();
         Person {
-            first_name: String::from("John"),
-            surname: String::from("Doe"),
+            first_name: Person::gen_rand_fname().to_string(),
+            surname: Person::gen_rand_lname().to_string(),
             date_of_birth: {
                 let d = Utc::now().date();
                 let current_year = d.year();
