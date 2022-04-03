@@ -5,6 +5,7 @@ use crate::utils::get_random_country_phone_code;
 pub mod datetime;
 pub mod email;
 pub mod person;
+pub mod providers;
 pub mod utils;
 
 /// Generates a random phone number
