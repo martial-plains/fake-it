@@ -1,28 +1,20 @@
 /// Gets all female name formats
 pub fn female_formats() -> Vec<&'static str> {
     vec![
-        "{{first_name_female}} {{last_name}}",
-        "{{first_name_female}} {{last_name}}",
-        "{{first_name_female}} {{last_name}}",
-        "{{first_name_female}} {{last_name}}",
-        "{{first_name_female}} {{last_name}}",
-        "{{prefix_female}} {{first_name_female}} {{last_name}}",
-        "{{first_name_female}} {{last_name}} {{suffix_female}}",
-        "{{prefix_female}} {{first_name_female}} {{last_name}} {{suffix_female}}",
+        "{first_name_female} {last_name}",
+        "{prefix_female} {first_name_female} {last_name}",
+        "{first_name_female} {last_name} {suffix_female}",
+        "{prefix_female} {first_name_female} {last_name} {suffix_female}",
     ]
 }
 
 /// Gets all male name formats
 pub fn male_formats() -> Vec<&'static str> {
     vec![
-        "{{first_name_male}} {{last_name}}",
-        "{{first_name_male}} {{last_name}}",
-        "{{first_name_male}} {{last_name}}",
-        "{{first_name_male}} {{last_name}}",
-        "{{first_name_male}} {{last_name}}",
-        "{{prefix_male}} {{first_name_male}} {{last_name}}",
-        "{{first_name_male}} {{last_name}} {{suffix_male}}",
-        "{{prefix_male}} {{first_name_male}} {{last_name}} {{suffix_male}}",
+        "{first_name_male} {last_name}",
+        "{prefix_male} {first_name_male} {last_name}",
+        "{first_name_male} {last_name} {suffix_male}",
+        "{prefix_male} {first_name_male} {last_name} {suffix_male}",
     ]
 }
 
@@ -7751,7 +7743,7 @@ pub fn suffixes_female() -> Vec<&'static str> {
     vec!["MD", "DDS", "PhD", "DVM"]
 }
 
-/// Gets all suffixes for males 
+/// Gets all suffixes for males
 pub fn suffixes_male() -> Vec<&'static str> {
     vec![
         "Jr.", "Sr.", "I", "II", "III", "IV", "V", "MD", "DDS", "PhD", "DVM",
