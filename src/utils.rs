@@ -3,7 +3,7 @@ use std::{collections::HashMap, fs::File, io::Write, path::Path};
 use log::info;
 use rand::Rng;
 use serde::Serialize;
-use serde_json::{json, Value};
+use serde_json::json;
 
 /// Export data to a JSON file
 ///
