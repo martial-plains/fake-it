@@ -1,31 +1,3 @@
-/// Gets all female name formats
-pub fn female_formats() -> Vec<&'static str> {
-    vec![
-        "{first_name_female} {last_name}",
-        "{prefix_female} {first_name_female} {last_name}",
-        "{first_name_female} {last_name} {suffix_female}",
-        "{prefix_female} {first_name_female} {last_name} {suffix_female}",
-    ]
-}
-
-/// Gets all male name formats
-pub fn male_formats() -> Vec<&'static str> {
-    vec![
-        "{first_name_male} {last_name}",
-        "{prefix_male} {first_name_male} {last_name}",
-        "{first_name_male} {last_name} {suffix_male}",
-        "{prefix_male} {first_name_male} {last_name} {suffix_male}",
-    ]
-}
-
-/// Gets all name formats
-pub fn formats() -> Vec<&'static str> {
-    let mut name = Vec::new();
-    name.append(&mut male_formats());
-    name.append(&mut female_formats());
-    name
-}
-
 /// Gets all female first names
 pub fn first_names_female() -> Vec<&'static str> {
     vec![
@@ -7725,27 +7697,5 @@ pub fn last_names() -> Vec<&'static str> {
         "Ziemann",
         "Zieme",
         "Zulauf",
-    ]
-}
-
-/// Gets all prefixes for females
-pub fn prefixes_female() -> Vec<&'static str> {
-    vec!["Mrs.", "Ms.", "Miss", "Dr."]
-}
-
-/// Gets all prefixes for males
-pub fn prefixes_male() -> Vec<&'static str> {
-    vec!["Mr.", "Dr."]
-}
-
-/// Gets all suffixes for female
-pub fn suffixes_female() -> Vec<&'static str> {
-    vec!["MD", "DDS", "PhD", "DVM"]
-}
-
-/// Gets all suffixes for males
-pub fn suffixes_male() -> Vec<&'static str> {
-    vec![
-        "Jr.", "Sr.", "I", "II", "III", "IV", "V", "MD", "DDS", "PhD", "DVM",
     ]
 }
