@@ -11,7 +11,7 @@ fn bench(b: &mut Bencher) {
 
 fn create_100_random_person_names() {
     for _ in 0..100 {
-        let names = Person::gen_rand_fname();
-        let surnames = Person::gen_rand_lname();
+        let _names = Person::gen_rand_fname();
+        let _surnames = Person::gen_rand_lname();
     }
 }
