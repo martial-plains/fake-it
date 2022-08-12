@@ -6,7 +6,7 @@ use test::Bencher;
 
 #[bench]
 fn bench(b: &mut Bencher) {
-    b.iter(|| create_100_random_person_names());
+    b.iter(create_100_random_person_names);
 }
 
 fn create_100_random_person_names() {

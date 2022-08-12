@@ -26,6 +26,21 @@ pub fn generate_phone_number(cc: Option<String>) -> String {
     )
 }
 
+/// Gets Country from a phone number
+pub fn get_country_from_phone_number(phone_number: &str) -> Option<String> {
+    let country_phone_codes = utils::get_country_phone_codes();
+
+    for (country_name, country_code) in country_phone_codes.iter() {
+        let cc = phone_number.split('-').next().unwrap();
+
+        if cc.contains(country_code) {
+            return Some(country_name.to_string());
+        }
+    }
+
+    None
+}
+
 #[cfg(test)]
 mod tests {
     use log::info;
@@ -37,7 +52,7 @@ mod tests {
         info!("Generating phone number with country code");
         let mut phone_number = generate_phone_number(Some("1".to_string()));
         info!("{}", phone_number);
-        phone_number = phone_number.replace("-", "");
+        phone_number = phone_number.replace('-', "");
         assert!(phone_number.len() == 12);
     }
 }

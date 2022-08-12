@@ -61,7 +61,7 @@ where
 
     info!("Writing to file: {}", path);
 
-    html.write(
+    html.write_all(
         format!(
             "<!DOCTYPE html><html><head><title>{}</title></head><body><table><tr>",
             file_path.file_stem().unwrap().to_str().unwrap()
@@ -71,14 +71,14 @@ where
 
     // To HTML table
     for row in data {
-        html.write(b"<tr>")?;
+        html.write_all(b"<tr>")?;
         for cell in json!(row).as_object().unwrap().values() {
-            html.write(format!("<td>{}</td>", cell.as_str().unwrap()).as_bytes())?;
+            html.write_all(format!("<td>{}</td>", cell.as_str().unwrap()).as_bytes())?;
         }
-        html.write(b"</tr>")?;
+        html.write_all(b"</tr>")?;
     }
 
-    html.write(b"</table></body></html>")?;
+    html.write_all(b"</table></body></html>")?;
 
     Ok(())
 }
@@ -103,7 +103,7 @@ pub fn get_random_country_phone_code() -> String {
     let mut rng = rand::thread_rng();
     let country_phone_codes = get_country_phone_codes();
     let country_codes: Vec<String> = country_phone_codes
-        .keys()
+        .values()
         .map(|key| key.to_string())
         .collect();
     let random_country_code = &country_codes[rng.gen_range(0..country_codes.len())];
@@ -128,12 +128,12 @@ mod tests {
     #[test]
     fn test_get_random_country_phone_code() {
         let country_phone_codes = get_country_phone_codes();
-        let country_codes: Vec<String> = country_phone_codes
-            .keys()
-            .map(|key| key.to_string())
-            .collect();
+
         let random_country_code = get_random_country_phone_code();
-        assert!(country_codes.contains(&random_country_code));
+        assert!(country_phone_codes
+            .values()
+            .map(|key| key.to_string())
+            .any(|x| x == random_country_code));
     }
 
     #[test]
@@ -146,7 +146,7 @@ mod tests {
     fn test_export_to_json() {
         let data = "Hello World";
         let path = "test.json";
-        export_to_json(&data, &path).unwrap();
+        export_to_json(&data, path).unwrap();
         assert!(std::path::Path::new(&path).exists());
         fs::remove_file(&path).unwrap();
     }
@@ -155,7 +155,7 @@ mod tests {
     fn test_export_to_csv() {
         let data = vec!["Hello World"];
         let path = "test.csv";
-        export_to_csv(&data, &path).unwrap();
+        export_to_csv(&data, path).unwrap();
         assert!(std::path::Path::new(&path).exists());
         fs::remove_file(&path).unwrap();
     }

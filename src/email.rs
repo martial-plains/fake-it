@@ -77,7 +77,6 @@ mod tests {
     #[test]
     fn test_generate() {
         let email = generate(None);
-        println!("{}", email);
         assert!(is_valid(&email));
     }
 }

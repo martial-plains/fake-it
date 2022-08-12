@@ -129,7 +129,7 @@ impl std::fmt::Display for Person {
                 write!(f, "{} {}", self.first_name(), self.surname())
             }
             Gender::Female => match self.is_married() {
-                true => write!(f, "{} {} {}", "Mrs.", self.first_name(), self.surname()),
+                true => write!(f, "Mrs. {} {}", self.first_name(), self.surname()),
                 false => write!(f, "{} {}", self.first_name(), self.surname()),
             },
         }
