@@ -97,7 +97,7 @@ impl Default for Person {
             first_name,
             surname: Person::gen_rand_lname().to_string(),
             date_of_birth: {
-                let d = Utc::now().date();
+                let d = Utc::now().date_naive();
                 let current_year = d.year();
                 let current_month = d.month();
                 let current_day = d.day();
@@ -107,7 +107,7 @@ impl Default for Person {
                     let month = rng.gen_range(1..current_month);
                     if month == current_month {
                         let day = rng.gen_range(1..current_day);
-                        Utc.ymd(year, month, day).and_hms(0, 0, 0)
+                        Utc.with_ymd_and_hms(year, month, day, 0, 0, 0).unwrap()
                     } else {
                         datetime::get_random_date_in_month(year, month)
                     }

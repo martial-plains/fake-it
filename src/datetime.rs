@@ -6,5 +6,5 @@ pub fn get_random_date_in_month(year: i32, month: u32) -> DateTime<Utc> {
     if month == 2 && year % 4 == 0 {
         day += 1;
     }
-    Utc.ymd(year, month, day).and_hms(0, 0, 0)
+    Utc.with_ymd_and_hms(year, month, day, 0, 0, 0).unwrap()
 }

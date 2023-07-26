@@ -148,7 +148,7 @@ mod tests {
         let path = "test.json";
         export_to_json(&data, path).unwrap();
         assert!(std::path::Path::new(&path).exists());
-        fs::remove_file(&path).unwrap();
+        fs::remove_file(path).unwrap();
     }
 
     #[test]
@@ -157,6 +157,6 @@ mod tests {
         let path = "test.csv";
         export_to_csv(&data, path).unwrap();
         assert!(std::path::Path::new(&path).exists());
-        fs::remove_file(&path).unwrap();
+        fs::remove_file(path).unwrap();
     }
 }

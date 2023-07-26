@@ -27,10 +27,10 @@ pub fn generate(person: Option<Person>) -> String {
     let mut rng = rand::thread_rng();
     let person = person.unwrap_or_default();
 
-    let domains = vec![
+    let domains = [
         "gmail", "yahoo", "outlook", "express", "yandex", "nexus", "icloud",
     ];
-    let extensions = vec![
+    let extensions = [
         "com", "in", "jp", "us", "uk", "org", "edu", "au", "de", "co", "me", "biz", "dev", "ngo",
         "site", "xyz", "zero", "tech",
     ];
